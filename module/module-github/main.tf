@@ -1,5 +1,5 @@
 module "instance_provisioning" {
-  source      = "git::https://github.com/arumugam0911/terraform/tree/master/module"
+  source      = "git::https://github.com/arumugam0911/terraform//module/module-code?ref=master"
   module_security_group      = var.module_security_group
   cidr        = var.cidr
   amiid       = var.amiid
