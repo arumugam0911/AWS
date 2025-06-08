@@ -1,4 +1,4 @@
-# Create a VPC
+# Create a VPC 
 resource "aws_vpc" "terraform-vpc" {
   cidr_block           =  var.vpcblock
   tags = {
