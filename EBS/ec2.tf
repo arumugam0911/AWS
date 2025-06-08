@@ -1,6 +1,6 @@
 # EC2 instance resource
 resource "aws_instance" "terraform_ec2" {
-  ami             = "ami-056ccbb7e1ac748a2"
+  ami             = var.ami
   key_name        = var.keypair
   instance_type   = var.instance_type
   security_groups = [var.linux_security_group]
@@ -9,7 +9,7 @@ resource "aws_instance" "terraform_ec2" {
     Env   = "dev"
   }
 }
-# EBS Volume
+# Create EBS Volume
 resource "aws_ebs_volume" "additional_storage" {
   availability_zone = aws_instance.terraform_ec2.availability_zone  # Match your instance's AZ
   size              = 1            # Size in GB
@@ -17,7 +17,7 @@ resource "aws_ebs_volume" "additional_storage" {
     Name = "MyFirstEBSVolume"
   }
 }
-# Attach EBS Volume to EC2 instance
+# attach additional EBS to EC2 instance
 resource "aws_volume_attachment" "ebs_attachment" {
   device_name = "/dev/xvdb"  # Use a valid device name for your OS
   volume_id   = aws_ebs_volume.additional_storage.id
